@@ -1,0 +1,2 @@
+(this["webpackJsonpinsta-clone"]=this["webpackJsonpinsta-clone"]||[]).push([[7],{71:function(e,t,c){"use strict";c.r(t);var n=c(2),s=c(1);t.default=function(){return Object(n.useEffect)((function(){document.title="Not Found!"}),[]),Object(s.jsx)("div",{className:"bg-gray-200",children:Object(s.jsx)("div",{className:"mx-auto max-w-screen=lg",children:Object(s.jsx)("p",{className:"text-center text-2xl",children:"Not Found!"})})})}}}]);
+//# sourceMappingURL=7.2e9325cc.chunk.js.map
