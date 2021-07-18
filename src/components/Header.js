@@ -15,20 +15,21 @@ function Header() {
 
 
     return (
-        <div className="py-2">
-            <header className="h-16 bg-white border-b border-gray-500 mb-8 fixed top-0 w-full">
-                <div className="container mx-auto max-w-screen-lg h-full ">
-                    <div className="flex justify-between h-full">
+        <div className="py-2 z-20">
+            <header className="h-16 bg-white border-b border-gray-500 mb-8 fixed top-0 w-full z-20">
+                <div className="container max-w-screen-sm mx-auto md:max-w-screen-md lg:max-w-screen-lg h-full ">
+                    <div className="flex sm:justify-between justify-around h-full">
                         <div className="text-gray-700 text-center flex items-center alignItems cursor-pointer">
                             <h1 className="flex justify-center w-full">
                                 <Link to={ROUTES.DASHBOARD} aria-label="Instagram-logo">
-                                    <img src={"/images/logo.png"} alt="Instagram-logo" className="mt-2 w-6/12" />
+                                    <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Instagram-logo" className="mt-2 w-6/12" />
                                 </Link>
                             </h1>
                         </div>
                         <div className="text-gray-700 text-center gap-4 flex items-center align-items">
                             {user ? (
                                 <>
+
                                     <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -43,7 +44,6 @@ function Header() {
                                             }}
                                             onKeyDown={(event) => {
                                                 if (event.key === 'Enter') {
-                                                    console.log(firebase.auth().signOut());
                                                 }
                                             }}>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +56,7 @@ function Header() {
 
                                             <img className="rounded-full h-8 w-8"
                                                 alt={`${user.displayName} profile `}
-                                                src={user.profilePicture ? user.profilePicture : "/images/avatars/dali.jpg"}
+                                                src={user.profilePicture ? user.profilePicture : process.env.PUBLIC_URL + "/images/avatars/dali.jpg"}
                                             />
 
                                         </div>

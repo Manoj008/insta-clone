@@ -1,5 +1,7 @@
 import { FieldValue, firebase } from '../lib/Firebase';
 import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast, zoom, bounce } from 'react-toastify';
+
 
 export async function doesUsernameExist(username) {
     const result = await firebase.firestore().collection('users').where('username', '==', username).get();
@@ -9,7 +11,6 @@ export async function doesUsernameExist(username) {
 
 export async function doesEmailExist(email) {
     const result = await firebase.firestore().collection('users').where('email', '==', email).get();
-    console.log(" in email check")
     return result.docs.length > 0;
 }
 
@@ -26,7 +27,7 @@ export async function getUserByUsername(username) {
     const result = await firebase.firestore()
         .collection('users')
         .where('username', '==', username)
-        .get()
+        .get();
 
 
     return result.docs.map((item) => ({
@@ -49,11 +50,25 @@ export async function getUserPhotosByUserId(userId) {
 
 
 export async function getSuggestedProfiles(userId, following) {
-    const result = await firebase.firestore().collection('users').limit(10).get();
+    const result = await firebase.firestore().collection('users').limit(20).get();
 
     return result.docs.map((user) => ({ ...user.data(), docId: user.id }))
         .filter((profile) => profile.userId !== userId && !following.includes(profile.userId));
 
+}
+
+export async function getFollowers(userId, followers) {
+    const result = await firebase.firestore().collection('users').get();
+
+    return result.docs.map((user) => ({ ...user.data(), docId: user.id }))
+        .filter((profile) => profile.userId !== userId && followers.includes(profile.userId));
+}
+
+export async function getFollowings(userId, followings) {
+    const result = await firebase.firestore().collection('users').get();
+
+    return result.docs.map((user) => ({ ...user.data(), docId: user.id }))
+        .filter((profile) => profile.userId !== userId && followings.includes(profile.userId));
 }
 
 export async function isUserFollowingProfile(loggedInUsername, profileUserId) {
@@ -102,11 +117,12 @@ export async function updateUserProfile(docId, base64Image) {
         .update({
             profilePicture: base64Image
         }).then(() => {
-            console.log("updated successfully")
+            document.getElementById("dp").src = base64Image;
         })
         .catch((error) => {
-            console.log("error occurred", error)
-        })
+            toast.error("something went wrong");
+
+        });
 }
 
 export async function updateUser(docId, user) {
@@ -121,10 +137,10 @@ export async function updateUser(docId, user) {
             mobile: user.mobile,
             gender: user.gender
         }).then(() => {
-            console.log("updated successfully")
+            toast.success("details updated successfully");
         })
         .catch((error) => {
-            console.log("error occurred", error)
+            toast.error("something went wrong, please try again");
         })
 }
 
@@ -184,9 +200,10 @@ export async function savePost(user, imageBase64) {
 
     result.set(obj)
         .then(() => {
-            console.log("Post uploaded successfully!");
+            toast.success("uploaded successfully");
         })
         .catch((error) => {
+            toast.error("something went wrong, please try again");
             console.error("Error uploading: ", error);
         });;
 }

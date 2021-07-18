@@ -22121,7 +22121,11 @@ video {
 }
 
 .fill-red {
-  fill: #dc2626;
+  fill: #991b1b;
+}
+
+.fill-blue {
+  fill: #1d4ed8;
 }
 
 .stroke-current {
@@ -51259,7 +51263,11 @@ video {
   }
 
   .sm\:fill-red {
-    fill: #dc2626;
+    fill: #991b1b;
+  }
+
+  .sm\:fill-blue {
+    fill: #1d4ed8;
   }
 
   .sm\:stroke-current {
@@ -80275,7 +80283,11 @@ video {
   }
 
   .md\:fill-red {
-    fill: #dc2626;
+    fill: #991b1b;
+  }
+
+  .md\:fill-blue {
+    fill: #1d4ed8;
   }
 
   .md\:stroke-current {
@@ -109291,7 +109303,11 @@ video {
   }
 
   .lg\:fill-red {
-    fill: #dc2626;
+    fill: #991b1b;
+  }
+
+  .lg\:fill-blue {
+    fill: #1d4ed8;
   }
 
   .lg\:stroke-current {
@@ -138307,7 +138323,11 @@ video {
   }
 
   .xl\:fill-red {
-    fill: #dc2626;
+    fill: #991b1b;
+  }
+
+  .xl\:fill-blue {
+    fill: #1d4ed8;
   }
 
   .xl\:stroke-current {
@@ -167323,7 +167343,11 @@ video {
   }
 
   .\32xl\:fill-red {
-    fill: #dc2626;
+    fill: #991b1b;
+  }
+
+  .\32xl\:fill-blue {
+    fill: #1d4ed8;
   }
 
   .\32xl\:stroke-current {

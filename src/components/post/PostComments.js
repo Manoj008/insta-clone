@@ -26,7 +26,7 @@ function PostComments({ docId, comments: allComments, posted, commentInput }) {
                     ))}
                 <p className="text-gray-800 text-xs mt-1">{formatDistance(posted, new Date())} ago</p>
             </div>
-            <PostAddComment
+            <PostAddComment className="bottom-0"
                 docId={docId}
                 comments={comments}
                 setComments={setComments}

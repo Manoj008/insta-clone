@@ -5,6 +5,8 @@ import UseUser from '../hooks/UseUser';
 import { getBase64 } from '../services/Default';
 import { savePost } from '../services/Firbase';
 import Post from './post/PostIndex';
+import { ToastContainer, toast, zoom, bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Timeline() {
     const { photos } = UsePhotos();
@@ -16,18 +18,16 @@ function Timeline() {
         getBase64(e.target.files[0])
             .then(result => {
                 savePost(user, result)
-                console.log(`result`, result)
             })
             .catch(err => {
-                console.log(err);
             });
     }
 
 
 
     return (
-        <div className="container col-span-2">
-            <div className=" flex items-center px-4 mx-2 mb-4">
+        <div className="container col-span-3 md:col-span-2 ">
+            <div className=" flex items-center px-4 mx-4 mb-4">
                 <div className=" flex flex-col h-0 w-2/5 border border-gray-500"></div>
                 <div className=" flex flex-col items-center w-1/5 py-2">
                     <label for="file-upload">
@@ -38,7 +38,18 @@ function Timeline() {
                 </div>
                 <div className=" flex flex-col h-0 w-2/5 border border-gray-500"></div>
             </div>
-
+            <p className="text-center mx-6 sm:mx-4 lg:ml-0mx-auto">please upload a file less thn 1MB, or else it will not upload</p>
+            <ToastContainer
+                position="top-center"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <input
                 type="file"
                 id="file-upload"

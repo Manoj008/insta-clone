@@ -25,7 +25,7 @@ function Suggestions({ userId, following, loggedInUserDocId }) {
         profiles.length > 0 ? (
             <div className="rounded flex flex-col ">
                 <div className="flex text-sm items-center align-items justify-between mb-2">
-                    <p className="font-bold text-gray-500">Suggestions for you</p>
+                    {profiles && <p className="font-bold text-gray-500">Suggestions for you</p>}
                 </div>
                 <div className="mt-4 grid gap-5">
                     {profiles.map((profile) => (
@@ -33,7 +33,7 @@ function Suggestions({ userId, following, loggedInUserDocId }) {
                             key={profile.docId}
                             profileDocId={profile.docId}
                             username={profile.username}
-                            suggestedUserPic={profile.profilePic}
+                            suggestedUserPic={profile.profilePicture}
                             profileId={profile.userId}
                             userId={userId}
                             loggedInUserDocId={loggedInUserDocId}

@@ -22,7 +22,6 @@ function Signup() {
     const handleSignup = async (e) => {
         e.preventDefault();
 
-        console.log("handle Signup")
         const usernameExist = await doesUsernameExist(username);
         const emailExist = await doesEmailExist(email);
         if (password !== confirmPass) {
@@ -37,7 +36,6 @@ function Signup() {
                     await createdUserResult.user.updateProfile({
                         displayName: username
                     });
-                    console.log("user sign in start");
                     await firebase.firestore().collection('users').add({
                         userId: createdUserResult.user.uid,
                         username: username,
@@ -51,7 +49,6 @@ function Signup() {
                         followers: [],
                         dateCreated: Date.now()
                     });
-                    console.log("signin end");
                     history.push(ROUTES.DASHBOARD);
 
 
@@ -86,12 +83,12 @@ function Signup() {
     return (
         <div className="container flex mx-auto max-w-screen-md items-center h-screen">
             <div className="flex flex-col w-2/3">
-                <img src="/images/iphone-with-profile.jpg" alt="Instgram" />
+                <img src={process.env.PUBLIC_URL + "/images/iphone-with-profile.jpg"} alt="Instgram" />
             </div>
             <div className="flex flex-col w-1/2">
                 <div className="flex justify-center items-center flex-col w-full bg-white p-8 mb-4 border border-gray-500 ">
                     <h1 className="flex justify-center w-full">
-                        <img src="/images/logo.png" alt="Instagram" className="my-4 w-2/3" />
+                        <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Instagram" className="my-4 w-2/3" />
                     </h1>
                     {error && <p className="mb-4 p-2 text-xs bg-red-200 text-black rounded">{error}</p>}
 

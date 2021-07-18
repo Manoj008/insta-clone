@@ -8,7 +8,7 @@ const User = ({ username, fullName, userProfilePic }) =>
         <Skeleton count={1} height={61} />
     )
         : (
-            <Link to={`/profile/${username}`} className='grid grid-cols-4 gap-4 mb-6 items-center '>
+            <Link to={`/profile/${username}`} className='hidden md:grid grid-cols-4 gap-4 mb-6 items-center '>
                 <div className='flex items-center justify-between col-span-1 w-12 h-12   mr-3 '>
                     <img src={userProfilePic} alt="profile pic" className="rounded-full w-12 h-12" />
                 </div>

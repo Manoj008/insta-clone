@@ -12,8 +12,7 @@ function Post({ content }) {
     const handleFocus = () => commentInput.current.focus();
 
     return (
-        <div className="rounded col-span-4 border bg-white border-gray-500 mb-8">
-            {console.log("post profile", content.profilePicture)}
+        <div className="rounded col-span-4 border bg-white border-gray-500 mb-8 mx-8 md:mx-4">
             <PostHeader username={content.username} profilePic={content.profilePicture ? content.profilePicture : "/images/avatars/dali.jpg"} />
             <PostImage src={content.imageSrc} caption={content.caption} />
             <PostActions

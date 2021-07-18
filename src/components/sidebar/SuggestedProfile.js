@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { updateLoggedInUserFollowing, updateFollowedUserFollowers } from '../../services/Firbase';
 
-function SuggestedProfile({ profileDocId, username, profilePic, profileId, userId, loggedInUserDocId }) {
+function SuggestedProfile({ profileDocId, username, suggestedUserPic, profileId, userId, loggedInUserDocId }) {
 
     const [followed, setFollowed] = useState(false);
 
@@ -15,10 +15,10 @@ function SuggestedProfile({ profileDocId, username, profilePic, profileId, userI
 
     return !followed ? (
         <div className="flex flex-row items-center align-items justify-between">
-            <div className="flex items-center justify-between">
+            <div className="block md:flex items-center justify-between mr-3">
                 <img
-                    className="rounded-full w-8 flex mr-3"
-                    src={profilePic ? profilePic : "/images/avatars/dali.jpg"}
+                    className="rounded-full w-10 h-10 mr-3"
+                    src={suggestedUserPic ? suggestedUserPic : process.env.PUBLIC_URL + "/images/avatars/dali.jpg"}
                     alt="user profile pic"
                 />
                 <Link to={`/profile/${username}`}>
@@ -27,7 +27,7 @@ function SuggestedProfile({ profileDocId, username, profilePic, profileId, userI
             </div>
             <div>
                 <button
-                    className="text-xs font-bold text-blue-500"
+                    className="text-xs font-bold text-blue-500 hidden md:block"
                     type="button"
                     onClick={handleFollowUser}
                 >

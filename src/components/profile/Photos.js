@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
+import UserContext from './UserContext';
 
-function Photos({ photos }) {
+function Photos({ photos, setSelectedImg }) {
+
+    const { selectedImg, dispatchUserEvent } = useContext(UserContext);
+
     return (
         <div className="h-16 border-t border-gray-300 mt-12 pt-4">
-            <div className="grid grid-cols-3 gap-8 mt-4 mb-12">
+            <div className="grid grid-cols-3 gap-4 mt-4 mb-12 mx-4">
                 {!photos ? (
                     <>
                         <Skeleton count={12} width={320} height={400} />
@@ -13,7 +17,7 @@ function Photos({ photos }) {
                 ) : (
                     photos.length > 0 ? (
                         photos.map((photo) => (
-                            <div key={photo.docId} className="relative group h-64  ">
+                            <div key={photo.docId} className="relative group  h-28 sm:h-48 md:h-64" onClick={() => dispatchUserEvent('SHOW_PHOTO', photo)}>
                                 <img src={photo.imageSrc}
                                     alt={photo.caption} className="object-cover w-full h-full" />
                                 <div className="absolute bottom-0 left-0 w-full h-full 

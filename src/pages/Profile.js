@@ -4,12 +4,15 @@ import { getUserByUsername } from '../services/Firbase';
 import * as ROUTES from '../constants/Routes';
 import Header from '../components/Header';
 import UserProfile from '../components/profile/ProfileIndex';
+import UserContext from '../components/profile/UserContext';
+import FollowContext from '../context/FollowContext';
 
 function Profile() {
 
     const { username } = useParams();
-    const [user, setUser] = useState(null);
+    const [userr, setUserr] = useState(null);
     const history = useHistory();
+
 
     useEffect(() => {
 
@@ -17,7 +20,7 @@ function Profile() {
             const returnedUser = await getUserByUsername(username);
 
             if (returnedUser.length > 0) {
-                setUser(returnedUser[0]);
+                setUserr(returnedUser[0]);
                 document.title = `${returnedUser[0].fullName} (@${username})`;
             } else {
                 history.push(ROUTES.NOT_FOUND)
@@ -26,14 +29,27 @@ function Profile() {
         checkUserExist();
     }, [username, history])
 
-    return user?.username ? (
+    const dispatchFollowEvent = (actionType, payload) => {
+        switch (actionType) {
+            case 'UPDATE_FOLLOWER':
+                setUserr(payload);
+                return;
+            default:
+                return;
+        }
+    };
+
+
+    return userr?.username ? (
         <>
             <Header />
-            <div className=" mx-auto max-w-screen-lg">
-                <div className="mx-auto mx-w-screen-lg">
-                    <UserProfile user={user} />
+            <FollowContext.Provider value={{ userr: userr, dispatchFollowEvent: dispatchFollowEvent }}>
+                <div className=" mx-auto max-w-screen-lg">
+                    <div className="mx-auto mx-w-screen-lg">
+                        <UserProfile />
+                    </div>
                 </div>
-            </div>
+            </FollowContext.Provider>
         </>
     ) : null;
 }

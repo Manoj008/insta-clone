@@ -15,7 +15,6 @@ function UseUser() {
             getUSerObjectByUserId();
         }
     }, [user])
-    console.log(`activeUser`, activeUser)
 
     return { user: activeUser };
 

@@ -201,7 +201,8 @@ module.exports = {
     },
     fill: { current: 'currentColor' },
     fill: (theme) => ({
-      red: theme('colors.red.600')
+      red: theme('colors.red.800'),
+      blue: theme('colors.blue.700')
     }),
     grayscale: {
       0: '0',
