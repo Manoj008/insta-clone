@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton';
 import FollowContext from '../../context/FollowContext';
 import { getFollowers, getFollowings } from '../../services/Firbase';
+import Loader from '../Loader';
 import FollowerFollowingProfile from './FollowerFollowingProfile';
 import UserContext from './UserContext'
 
-function FollowerFollowing({ isFollow, setProfile }) {
+function FollowerFollowing({ isFollow, setProfile, postSet }) {
 
     const [profiles, setProfiles] = useState(null);
     const { followers, followings, dispatchUserEvent } = useContext(UserContext);
@@ -41,17 +42,18 @@ function FollowerFollowing({ isFollow, setProfile }) {
         if (e.target.classList.contains("backdrop-filter")) {
             followers && dispatchUserEvent('HIDE_FOLLOWERS', {});
             followings && dispatchUserEvent('HIDE_FOLLOWING', {});
+
         }
     }
 
     return !profiles ? (
-        <Skeleton count={1} height={150} className="mt-5" />
+        <Loader />
     ) :
 
         profiles.length > 0 ? (
             <div className="fixed flex w-full h-full justify-center items-center inset-0 start-0 top-0 backdrop-filter backdrop-blur-lg"
                 onClick={handleClick}>
-                <div className="w-full sm:w-2/5 md:w-3/12 rounded-md flex flex-col bg-gray-100 ">
+                <div className="w-10/12 sm:w-2/5 md:w-3/12 rounded-md flex flex-col bg-gray-100 ">
                     <div className=" text-sm text-center grid-3 relative justify-end my-2 ">
                         <p className="font-bold text-gray-600 object-center">{isFollow ? 'Followers' : 'Following'}</p>
                         <div className="absolute right-0 top-0 " onClick={() => (dispatchUserEvent('HIDE_FOLLOWERS', {}), dispatchUserEvent('HIDE_FOLLOWING', {}))}>
@@ -72,6 +74,8 @@ function FollowerFollowing({ isFollow, setProfile }) {
                                 loggedInUserDocId={userr.docId}
                                 isFollow={userr.following.includes(profile.userId)}
                                 setProfile={setProfile}
+                                postSet={postSet}
+
                             />
                         ))}
                     </div>

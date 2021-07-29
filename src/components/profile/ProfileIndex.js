@@ -7,6 +7,7 @@ import Modal from './Modal';
 import FollowerFollowing from './FollowerFollowing';
 import UserContext from "./UserContext.js";
 import FollowContext from "../../context/FollowContext";
+import Loader from '../Loader';
 
 
 function UserProfile() {
@@ -25,6 +26,7 @@ function UserProfile() {
     const [selectedImg, setSelectedImg] = useState(null);
     const [followers, setFollowers] = useState(null);
     const [followings, setFollowings] = useState(null);
+    const [postSet, setPostSet] = useState(null);
 
     const dispatchUserEvent = (actionType, payload) => {
         switch (actionType) {
@@ -54,11 +56,12 @@ function UserProfile() {
 
     useEffect(() => {
         async function getProfileInfoAndPhotos() {
-            const photos = await getUserPhotosByUserId(userr.userId);
 
+            const photos = await getUserPhotosByUserId(userr.userId);
+            setPostSet(photos);
             photos.sort((a, b) => b.dateCreated - a.dateCreated);
 
-            dispatch({ profile: userr, photosCollection: photos, followerCount: userr.followers.length, followingCount: userr.following.length });
+            dispatch({ profile: userr, photosCollection: postSet, followerCount: userr.followers.length, followingCount: userr.following.length });
 
 
         }
@@ -68,30 +71,36 @@ function UserProfile() {
     }, [userr, followers, followings]);
 
     return (
-        <UserContext.Provider value={{ followers, followings, selectedImg, dispatchUserEvent }}>
+        postSet ? (
+            <UserContext.Provider value={{ followers, followings, selectedImg, dispatchUserEvent }}>
 
 
-            <ProfileHeader
-                photosCount={photosCollection ? photosCollection.length : 0}
-                followerCount={followerCount}
-                followingCount={followingCount}
-                setFollowerCount={dispatch}
-            />
-            <Photos photos={photosCollection} />
-            {selectedImg && <Modal />}
-            {followers &&
-                <FollowerFollowing
-                    isFollow={true}
-                    setProfile={dispatch}
+                <ProfileHeader
+                    photosCount={photosCollection ? photosCollection.length : 0}
+                    followerCount={followerCount}
+                    followingCount={followingCount}
+                    setFollowerCount={dispatch}
                 />
-            }
-            {followings &&
-                <FollowerFollowing
-                    isFollow={false}
-                    setProfile={dispatch}
-                />
-            }
-        </UserContext.Provider>
+
+                { <Photos photos={postSet} />}
+                {selectedImg && <Modal />}
+                {followers &&
+                    <FollowerFollowing
+                        isFollow={true}
+                        setProfile={dispatch}
+                        postSet={setPostSet}
+                    />
+                }
+                {followings &&
+                    <FollowerFollowing
+                        isFollow={false}
+                        setProfile={dispatch}
+                        postSet={setPostSet}
+
+                    />
+                }
+            </UserContext.Provider>
+        ) : <Loader />
     )
 }
 

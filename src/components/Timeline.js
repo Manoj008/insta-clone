@@ -7,6 +7,7 @@ import { savePost } from '../services/Firbase';
 import Post from './post/PostIndex';
 import { ToastContainer, toast, zoom, bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from './Loader';
 
 function Timeline() {
     const { photos } = UsePhotos();
@@ -27,7 +28,7 @@ function Timeline() {
 
     return (
         <div className="container col-span-3 md:col-span-2 ">
-            <div className=" flex items-center px-4 mx-4 mb-4">
+            <div className=" flex items-center px-4 mx-4 mb-0 mt-28 md:mt-0">
                 <div className=" flex flex-col h-0 w-2/5 border border-gray-500"></div>
                 <div className=" flex flex-col items-center w-1/5 py-2">
                     <label for="file-upload">
@@ -38,7 +39,7 @@ function Timeline() {
                 </div>
                 <div className=" flex flex-col h-0 w-2/5 border border-gray-500"></div>
             </div>
-            <p className="text-center mx-6 sm:mx-4 lg:ml-0mx-auto">please upload a file less thn 1MB, or else it will not upload</p>
+            <p className="text-center mx-6 sm:mx-4 lg:ml-0 mx-auto mb-4">please upload a file less than 1MB, or else it will not upload</p>
             <ToastContainer
                 position="top-center"
                 autoClose={4000}
@@ -61,7 +62,8 @@ function Timeline() {
             {
                 !photos ? (
                     <>
-                        <Skeleton count={1} width={640} height={400} className="mb-5" />
+                        <Loader />
+                        {/* <Skeleton count={1} className="mb-5 w-auto h-auto" /> */}
                     </>
                 ) : (
                     photos.length > 0 ?

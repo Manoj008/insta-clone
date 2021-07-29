@@ -5,7 +5,7 @@ import UseUser from '../../hooks/UseUser';
 import { getUSerByUserId, updateFollowedUserFollowers, updateLoggedInUserFollowing } from '../../services/Firbase';
 import UserContext from './UserContext';
 
-function FollowerFollowingProfile({ profileDocId, username, suggestedUserPic, profileId, userId, loggedInUserDocId, isFollow, setProfile }) {
+function FollowerFollowingProfile({ profileDocId, username, suggestedUserPic, profileId, userId, loggedInUserDocId, isFollow, setProfile, postSet }) {
     const [followed, setFollowed] = useState(isFollow);
     const { followers, followings, dispatchUserEvent } = useContext(UserContext);
 
@@ -32,6 +32,7 @@ function FollowerFollowingProfile({ profileDocId, username, suggestedUserPic, pr
     }
 
     const handleClick = (e) => {
+        postSet(null)
         dispatchUserEvent('HIDE_FOLLOWING', {});
         dispatchUserEvent('HIDE_FOLLOWERS', {});
     }

@@ -14,15 +14,15 @@ function SuggestedProfile({ profileDocId, username, suggestedUserPic, profileId,
     }
 
     return !followed ? (
-        <div className="flex flex-row items-center align-items justify-between">
-            <div className="block md:flex items-center justify-between mr-3">
-                <img
-                    className="rounded-full w-10 h-10 mr-3"
-                    src={suggestedUserPic ? suggestedUserPic : process.env.PUBLIC_URL + "/images/avatars/dali.jpg"}
-                    alt="user profile pic"
-                />
-                <Link to={`/profile/${username}`}>
-                    <p className="font-bold text-sm">{username}</p>
+        <div className="grid md:grid-cols-8 md:gap-4 items-center">
+            <div className="block  md:flex md:col-span-6 items-center justify-between md:px-2">
+                <Link to={`/profile/${username}`} className="md:flex md:items-center text-center w-10 md:w-full">
+                    <img
+                        className="rounded-full w-10 h-10  mx-4 md:mx-0 md:pd-0"
+                        src={suggestedUserPic ? suggestedUserPic : process.env.PUBLIC_URL + "/images/avatars/dali.jpg"}
+                        alt="user profile pic"
+                    />
+                    <p className="font-bold text-sm md:mx-3 hidden md:block">{username.length > 8 ? username.substring(0, 8) + '.' : username}</p>
                 </Link>
             </div>
             <div>

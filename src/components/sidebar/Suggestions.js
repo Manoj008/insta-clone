@@ -23,11 +23,11 @@ function Suggestions({ userId, following, loggedInUserDocId }) {
     ) :
 
         profiles.length > 0 ? (
-            <div className="rounded flex flex-col ">
+            <div className="rounded absolute top-16  md:static md:flex md:flex-col  ">
                 <div className="flex text-sm items-center align-items justify-between mb-2">
-                    {profiles && <p className="font-bold text-gray-500">Suggestions for you</p>}
+                    {profiles && <p className="font-bold text-gray-500 ml-3 md:ml-0">Suggestions for you</p>}
                 </div>
-                <div className="mt-4 grid gap-5">
+                <div className=" rounded-md flex md:grid md:gap-5 overflow-x-auto max-w-full w-10/12 mx-3 px-1 py-2 bg-gray-300 md:px-2 md:mx-0 ">
                     {profiles.map((profile) => (
                         <SuggestedProfile
                             key={profile.docId}
@@ -40,6 +40,7 @@ function Suggestions({ userId, following, loggedInUserDocId }) {
                         />
                     ))}
                 </div>
+
             </div>
         ) : null
 

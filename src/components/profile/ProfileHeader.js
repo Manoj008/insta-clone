@@ -51,7 +51,7 @@ function ProfileHeader({ photosCount, followerCount, followingCount, setFollower
     }
 
     return (
-        <div className="md:grid md:grid-cols-3 md:gap-4 justify-between mx-4 md:mx-auto max-w-screen-lg mb-16 mt-16">
+        <div className="md:grid md:grid-cols-3 md:gap-4 justify-between mx-4 md:mx-auto max-w-screen-lg mb-8 mt-16">
             <div className="container relative md:flex justify-center">
                 {
                     (userr.username) && (
@@ -106,7 +106,7 @@ function ProfileHeader({ photosCount, followerCount, followingCount, setFollower
                 </div>
                 <div className="container mt-1">
                     <p className="text-gray-700">
-                        {!userr.bio ? <Skeleton count={1} height={48} /> : userr.bio}
+                        {userr.bio}
                     </p>
                 </div>
             </div>

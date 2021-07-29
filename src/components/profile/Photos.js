@@ -2,17 +2,19 @@ import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import UserContext from './UserContext';
+import Loader from '../Loader';
 
 function Photos({ photos, setSelectedImg }) {
 
     const { selectedImg, dispatchUserEvent } = useContext(UserContext);
 
     return (
-        <div className="h-16 border-t border-gray-300 mt-12 pt-4">
+        <div className=" border-t border-gray-300 mt-8 pt-4">
             <div className="grid grid-cols-3 gap-4 mt-4 mb-12 mx-4">
                 {!photos ? (
                     <>
-                        <Skeleton count={12} width={320} height={400} />
+                        <Loader />
+                        {/* <Skeleton count={12} width={320} height={400} /> */}
                     </>
                 ) : (
                     photos.length > 0 ? (
@@ -42,7 +44,7 @@ function Photos({ photos, setSelectedImg }) {
                 )
                 }
             </div >
-            {!photos || (photos.length === 0 && <p className="text-center text-2xl">
+            {photos && (photos.length === 0 && <p className="text-center text-2xl">
                 No Posts Yet
             </p>)}
         </div >
